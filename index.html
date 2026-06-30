@@ -209,6 +209,35 @@
         .delay-8 { animation-delay: 0.8s; }
         .delay-9 { animation-delay: 0.9s; }
 
+        /* Efeitos de Destaque Máximo para o Evento Harmoniza */
+        .btn-highlight {
+            border: 2px solid rgba(255, 0, 51, 0.8) !important;
+            box-shadow: 0 0 25px rgba(255, 0, 51, 0.5), inset 0 0 15px rgba(255, 0, 51, 0.3) !important;
+            animation: pulseHighlight 2s infinite;
+            transform: scale(1.02);
+            background: rgba(255, 0, 51, 0.05);
+        }
+
+        .btn-highlight:hover {
+            transform: translateY(-5px) scale(1.05) rotateX(5deg) !important;
+        }
+
+        @keyframes pulseHighlight {
+            0% { box-shadow: 0 0 20px rgba(255, 0, 51, 0.4), inset 0 0 10px rgba(255, 0, 51, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 51, 0.9), inset 0 0 25px rgba(255, 0, 51, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(255, 0, 51, 0.4), inset 0 0 10px rgba(255, 0, 51, 0.2); }
+        }
+
+        .text-highlight-glow {
+            text-shadow: 0 0 15px rgba(255, 0, 51, 0.9), 0 0 30px rgba(255, 0, 51, 0.6);
+            animation: textPulse 1.5s infinite alternate;
+        }
+
+        @keyframes textPulse {
+            from { color: #ffffff; text-shadow: 0 0 10px rgba(255, 0, 51, 0.8); }
+            to { color: #ffcccc; text-shadow: 0 0 20px rgba(255, 0, 51, 1), 0 0 40px rgba(255, 0, 51, 0.8); }
+        }
+
     </style>
 </head>
 <body class="antialiased selection:bg-red-600 selection:text-white relative">
@@ -258,11 +287,11 @@
             <h1 class="text-4xl font-extrabold tracking-tight mb-2 text-glow-sweep uppercase">
                 Maia Produtor
             </h1>
-            <h2 class="text-lg font-medium text-red-500 mb-3 tracking-wide">
-                Produção de eventos, experiências e conexões.
+            <h2 class="text-lg font-medium text-blue-300 mb-3 tracking-wide">
+                Produção de eventos, experiências e conexões memoráveis.
             </h2>
             <p class="text-sm text-gray-400 font-light leading-relaxed max-w-md mx-auto">
-                
+                Transformando ideias em eventos inesquecíveis, com organização, estilo e impacto. A energia da noite na palma da sua mão.
             </p>
         </header>
 
@@ -270,33 +299,35 @@
         <nav class="w-full space-y-4 mb-12">
             
             <!-- Botão 1: Evento Harmoniza (Destaque Principal) -->
-            <div class="w-full fade-up delay-2 mb-8 relative pt-2">
-                <div class="text-center absolute -top-3 left-0 right-0 z-20">
-                    <span class="inline-block bg-[#0a0202] px-3 text-[10px] uppercase tracking-[0.2em] text-red-500 font-bold border-b border-red-500/50 pb-0.5">Próximo Evento</span>
+            <div class="w-full fade-up delay-2 mb-10 relative pt-3">
+                <div class="text-center absolute -top-4 left-0 right-0 z-20">
+                    <span class="inline-block bg-[#0a0202] px-4 py-1 text-xs uppercase tracking-[0.25em] text-red-500 font-extrabold border border-red-500/60 rounded-full shadow-[0_0_15px_rgba(255,0,51,0.5)]">
+                        Próximo Evento
+                    </span>
                 </div>
-                <a href="#" class="link-card group flex items-center p-3 w-full text-left mt-2 border-red-500/40 shadow-[0_0_20px_rgba(255,0,51,0.15)] hover:border-red-500/80" aria-label="Evento Harmoniza">
-                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="link-icon-wrapper w-14 h-14 rounded-full flex items-center justify-center text-2xl text-red-500 group-hover:text-white shrink-0">
+                <a href="#" class="link-card btn-highlight group flex items-center p-4 w-full text-left mt-2" aria-label="Evento Harmoniza">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/20 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="link-icon-wrapper w-16 h-16 rounded-full flex items-center justify-center text-3xl text-white shrink-0 bg-red-600 shadow-[0_0_15px_rgba(255,0,51,0.8)] border-none">
                         <i class="fas fa-fire"></i>
                     </div>
-                    <div class="ml-4 flex-1 relative z-10">
-                        <h3 class="text-xl font-bold text-white group-hover:text-red-300 transition-colors">Evento Harmoniza</h3>
-                        <p class="text-xs text-gray-300 mt-0.5">Garanta sua presença na nossa próxima grande festa</p>
+                    <div class="ml-5 flex-1 relative z-10">
+                        <h3 class="text-2xl font-black text-highlight-glow uppercase tracking-wide">Evento Harmoniza</h3>
+                        <p class="text-sm text-red-200 mt-1 font-medium">Garanta sua presença na nossa próxima grande festa!</p>
                     </div>
-                    <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-red-500">
-                        <i class="fas fa-chevron-right"></i>
+                    <div class="mr-2 opacity-100 transition-transform transform group-hover:translate-x-2 text-red-500 text-2xl">
+                        <i class="fas fa-arrow-right"></i>
                     </div>
                 </a>
             </div>
 
             <!-- Botão 2: WhatsApp Comercial -->
-            <a href="#" class="link-card fade-up delay-3 group flex items-center p-3 w-full text-left" aria-label="WhatsApp">
+            <a href="#" class="link-card fade-up delay-3 group flex items-center p-3 w-full text-left" aria-label="WhatsApp Comercial">
                 <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-green-500 group-hover:text-white shrink-0">
                     <i class="fab fa-whatsapp"></i>
                 </div>
                 <div class="ml-4 flex-1">
-                    <h3 class="text-lg font-semibold text-white group-hover:text-green-300 transition-colors">WhatsApp </h3>
-                    <p class="text-xs text-gray-400">Converse agora comigo</p>
+                    <h3 class="text-lg font-semibold text-white group-hover:text-green-300 transition-colors">WhatsApp Comercial</h3>
+                    <p class="text-xs text-gray-400">Atendimento rápido e direto</p>
                 </div>
                 <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
                     <i class="fas fa-chevron-right"></i>
@@ -309,7 +340,7 @@
                     <i class="fab fa-instagram"></i>
                 </div>
                 <div class="ml-4 flex-1">
-                    <h3 class="text-lg font-semibold text-white group-hover:text-rose-300 transition-colors">Instagram</h3>
+                    <h3 class="text-lg font-semibold text-white group-hover:text-rose-300 transition-colors">Instagram Oficial</h3>
                     <p class="text-xs text-gray-400">Acompanhe os bastidores e novidades</p>
                 </div>
                 <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
@@ -318,7 +349,7 @@
             </a>
 
             <!-- Botão 4: Agenda de Eventos -->
-            <a href="agenda" class="link-card fade-up delay-5 group flex items-center p-3 w-full text-left" aria-label="Agenda de Eventos">
+            <a href="#" class="link-card fade-up delay-5 group flex items-center p-3 w-full text-left" aria-label="Agenda de Eventos">
                 <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-orange-400 group-hover:text-white shrink-0">
                     <i class="far fa-calendar-alt"></i>
                 </div>
@@ -331,36 +362,8 @@
                 </div>
             </a>
 
-            <!-- Botão 5: Comprar Ingressos -->
-            <a href="#" class="link-card fade-up delay-6 group flex items-center p-3 w-full text-left" aria-label="Comprar Ingressos">
-                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-red-400 group-hover:text-white shrink-0">
-                    <i class="fas fa-ticket-alt"></i>
-                </div>
-                <div class="ml-4 flex-1">
-                    <h3 class="text-lg font-semibold text-white group-hover:text-red-300 transition-colors">Comprar Ingressos</h3>
-                    <p class="text-xs text-gray-400">Garanta seu lugar nas melhores festas</p>
-                </div>
-                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-
-            <!-- Botão 6: Portfólio de Eventos -->
-            <a href="#" class="link-card fade-up delay-7 group flex items-center p-3 w-full text-left" aria-label="Portfólio de Eventos">
-                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-yellow-500 group-hover:text-white shrink-0">
-                    <i class="fas fa-image"></i>
-                </div>
-                <div class="ml-4 flex-1">
-                    <h3 class="text-lg font-semibold text-white group-hover:text-yellow-300 transition-colors">Portfólio & Galeria</h3>
-                    <p class="text-xs text-gray-400">Fotos e vídeos de eventos passados</p>
-                </div>
-                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-
             <!-- Botão 8: Localização -->
-            <a href="#" class="link-card fade-up delay-9 group flex items-center p-3 w-full text-left" aria-label="Localização">
+            <a href="#" class="link-card fade-up delay-6 group flex items-center p-3 w-full text-left" aria-label="Localização">
                 <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-red-500 group-hover:text-white shrink-0">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
@@ -375,7 +378,7 @@
         </nav>
 
         <!-- Footer -->
-        <footer class="w-full text-center fade-up delay-9 mt-auto pt-8 border-t border-white/5">
+        <footer class="w-full text-center fade-up delay-7 mt-auto pt-8 border-t border-white/5">
             <div class="flex justify-center space-x-6 mb-4">
                 <a href="#" class="text-gray-500 hover:text-white hover:scale-110 transition-transform"><i class="fab fa-facebook-f text-xl"></i></a>
                 <a href="#" class="text-gray-500 hover:text-white hover:scale-110 transition-transform"><i class="fab fa-twitter text-xl"></i></a>
