@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maia Produtor | Eventos, Experiências e Conexões</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome (Ícones) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Three.js para renderização 3D e partículas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --neon-red: #ff0033;
+            --neon-orange: #ff4500;
+            --neon-darkred: #8b0000;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0a0202; /* Fundo escuro levemente avermelhado */
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Oculta scrollbar mas mantém a funcionalidade */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0202;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3a1515;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-red);
+        }
+
+        /* Efeito de Sweep de Luz no Título */
+        .text-glow-sweep {
+            background: linear-gradient(
+                90deg, 
+                #ffffff 0%, 
+                #ffffff 40%, 
+                var(--neon-red) 50%, 
+                var(--neon-orange) 60%, 
+                #ffffff 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 4s linear infinite;
+            text-shadow: 0 0 20px rgba(255, 0, 51, 0.4);
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Borda Pulsante do Perfil */
+        .profile-border {
+            position: relative;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, var(--neon-red), var(--neon-darkred), var(--neon-orange));
+            animation: borderRotate 4s linear infinite;
+        }
+
+        .profile-border::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-red), var(--neon-darkred), var(--neon-orange));
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.6;
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.4; filter: blur(10px); }
+            100% { opacity: 0.8; filter: blur(25px); }
+        }
+
+        /* Animação do Lobo de Fundo */
+        .wolf-bg-container {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%; max-width: 1200px;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 1;
+            animation: breatheWolf 8s ease-in-out infinite alternate;
+        }
+        
+        .wolf-svg {
+            width: 100%; height: auto;
+            filter: drop-shadow(0 0 15px var(--neon-red));
+        }
+        
+        @keyframes breatheWolf {
+            0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.04; filter: drop-shadow(0 0 5px var(--neon-red)); }
+            100% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.12; filter: drop-shadow(0 0 30px var(--neon-red)); }
+        }
+
+        /* Botões Glassmorphism Premium */
+        .link-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; h-full;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+
+        /* Interações Hover e Touch nos Botões */
+        .link-card:hover {
+            transform: translateY(-5px) scale(1.02) rotateX(5deg);
+            border-color: rgba(255, 0, 51, 0.4);
+            box-shadow: 
+                0 10px 20px -5px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba(255, 0, 51, 0.3),
+                inset 0 0 10px rgba(255, 69, 0, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .link-card:hover::before {
+            left: 150%;
+        }
+
+        .link-card:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: 0 0 10px rgba(255, 0, 51, 0.2);
+        }
+
+        /* Ícone do botão com gradiente */
+        .link-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover .link-icon-wrapper {
+            background: linear-gradient(135deg, var(--neon-red), var(--neon-darkred));
+            border-color: transparent;
+            color: white;
+            transform: translateZ(20px); /* Efeito 3D no ícone */
+        }
+
+        /* Animações de Entrada (Staggered Fade-Up) */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeUpAnim {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Delays para animação em cascata */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+        .delay-9 { animation-delay: 0.9s; }
+
+    </style>
+</head>
+<body class="antialiased selection:bg-red-600 selection:text-white relative">
+
+    <!-- Fundo fixo para o 3D (Three.js) -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+    
+    <!-- Lobo Geométrico Neon -->
+    <div class="wolf-bg-container">
+        <svg class="wolf-svg" viewBox="0 0 100 100" fill="none" stroke="var(--neon-red)" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round">
+            <!-- Orelhas -->
+            <polyline points="25,15 15,35 35,40 25,15" />
+            <polyline points="75,15 85,35 65,40 75,15" />
+            <!-- Face e bochechas -->
+            <polyline points="15,35 20,60 38,82 50,95 50,65 35,40 15,35" />
+            <polyline points="85,35 80,60 62,82 50,95 50,65 65,40 85,35" />
+            <!-- Testa -->
+            <polyline points="35,40 50,20 65,40" />
+            <!-- Olhos -->
+            <line x1="38" y1="55" x2="46" y2="58" />
+            <line x1="62" y1="55" x2="54" y2="58" />
+            <!-- Focinho interno -->
+            <polyline points="38,82 50,95 62,82" />
+        </svg>
+    </div>
+
+    <!-- Gradiente de sobreposição para garantir legibilidade (vinheta) -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#0a0202]/85 to-[#050000]"></div>
+
+    <!-- Conteúdo Principal -->
+    <main class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-12 sm:px-6 lg:px-8 max-w-2xl mx-auto">
+        
+        <!-- Seção de Perfil -->
+        <header class="text-center mb-10 w-full fade-up delay-1">
+            <!-- Avatar / Logo -->
+            <div class="relative w-32 h-32 mx-auto mb-5">
+                <div class="profile-border w-full h-full absolute top-0 left-0"></div>
+                <img 
+                    src="https://i.imgur.com/jwSWkFp.jpeg" 
+                    alt="Maia Produtor" 
+                    class="rounded-full w-full h-full object-cover relative z-10 border-4 border-[#0a0202]"
+                    onerror="this.src='https://placehold.co/200x200/0a0202/ffffff?text=M'"
+                >
+            </div>
+            
+            <!-- Título e Bio -->
+            <h1 class="text-4xl font-extrabold tracking-tight mb-2 text-glow-sweep uppercase">
+                Maia Produtor
+            </h1>
+            <h2 class="text-lg font-medium text-red-500 mb-3 tracking-wide">
+                Produção de eventos, experiências e conexões.
+            </h2>
+            <p class="text-sm text-gray-400 font-light leading-relaxed max-w-md mx-auto">
+                Transformando ideias em eventos inesquecíveis, com organização, estilo e impacto. A energia da noite na palma da sua mão.
+            </p>
+        </header>
+
+        <!-- Seção de Links -->
+        <nav class="w-full space-y-4 mb-12">
+            
+            <!-- Botão 1: Evento Harmoniza (Destaque Principal) -->
+            <div class="w-full fade-up delay-2 mb-8 relative pt-2">
+                <div class="text-center absolute -top-3 left-0 right-0 z-20">
+                    <span class="inline-block bg-[#0a0202] px-3 text-[10px] uppercase tracking-[0.2em] text-red-500 font-bold border-b border-red-500/50 pb-0.5">Próximo Evento</span>
+                </div>
+                <a href="#" class="link-card group flex items-center p-3 w-full text-left mt-2 border-red-500/40 shadow-[0_0_20px_rgba(255,0,51,0.15)] hover:border-red-500/80" aria-label="Evento Harmoniza">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="link-icon-wrapper w-14 h-14 rounded-full flex items-center justify-center text-2xl text-red-500 group-hover:text-white shrink-0">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="ml-4 flex-1 relative z-10">
+                        <h3 class="text-xl font-bold text-white group-hover:text-red-300 transition-colors">Evento Harmoniza</h3>
+                        <p class="text-xs text-gray-300 mt-0.5">Garanta sua presença na nossa próxima grande festa</p>
+                    </div>
+                    <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-red-500">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Botão 2: WhatsApp Comercial -->
+            <a href="#" class="link-card fade-up delay-3 group flex items-center p-3 w-full text-left" aria-label="WhatsApp">
+                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-green-500 group-hover:text-white shrink-0">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-white group-hover:text-green-300 transition-colors">WhatsApp </h3>
+                    <p class="text-xs text-gray-400"></p>
+                </div>
+                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- Botão 3: Instagram Oficial -->
+            <a href="#" class="link-card fade-up delay-4 group flex items-center p-3 w-full text-left" aria-label="Instagram Oficial">
+                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-rose-500 group-hover:text-white shrink-0">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-white group-hover:text-rose-300 transition-colors">Instagram Oficial</h3>
+                    <p class="text-xs text-gray-400">Acompanhe os bastidores e novidades</p>
+                </div>
+                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- Botão 4: Agenda de Eventos -->
+            <a href="#" class="link-card fade-up delay-5 group flex items-center p-3 w-full text-left" aria-label="Agenda de Eventos">
+                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-orange-400 group-hover:text-white shrink-0">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-white group-hover:text-orange-300 transition-colors">Agenda de Eventos</h3>
+                    <p class="text-xs text-gray-400">Confira onde estaremos nas próximas semanas</p>
+                </div>
+                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- Botão 5: Comprar Ingressos -->
+            <a href="#" class="link-card fade-up delay-6 group flex items-center p-3 w-full text-left" aria-label="Comprar Ingressos">
+                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-red-400 group-hover:text-white shrink-0">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-white group-hover:text-red-300 transition-colors">Comprar Ingressos</h3>
+                    <p class="text-xs text-gray-400">Garanta seu lugar nas melhores festas</p>
+                </div>
+                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- Botão 6: Portfólio de Eventos -->
+            <a href="#" class="link-card fade-up delay-7 group flex items-center p-3 w-full text-left" aria-label="Portfólio de Eventos">
+                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-yellow-500 group-hover:text-white shrink-0">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-white group-hover:text-yellow-300 transition-colors">Portfólio & Galeria</h3>
+                    <p class="text-xs text-gray-400">Fotos e vídeos de eventos passados</p>
+                </div>
+                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- Botão 8: Localização -->
+            <a href="#" class="link-card fade-up delay-9 group flex items-center p-3 w-full text-left" aria-label="Localização">
+                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-red-500 group-hover:text-white shrink-0">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="ml-4 flex-1">
+                    <h3 class="text-lg font-semibold text-white group-hover:text-red-300 transition-colors">Localização do Escritório</h3>
+                    <p class="text-xs text-gray-400">Venha tomar um café conosco</p>
+                </div>
+                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+        </nav>
+
+        <!-- Footer -->
+        <footer class="w-full text-center fade-up delay-9 mt-auto pt-8 border-t border-white/5">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-gray-500 hover:text-white hover:scale-110 transition-transform"><i class="fab fa-facebook-f text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white hover:scale-110 transition-transform"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white hover:scale-110 transition-transform"><i class="fab fa-youtube text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white hover:scale-110 transition-transform"><i class="fab fa-spotify text-xl"></i></a>
+            </div>
+            <p class="text-xs text-gray-500 font-light tracking-wide">
+                &copy; 2026 Maia Produtor — Eventos, experiências e conexões.<br>
+                <span class="opacity-50">Produzido com impacto e energia.</span>
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        // Configuração básica da cena 3D usando Three.js
+        const canvas = document.querySelector('#bg-canvas');
+        const scene = new THREE.Scene();
+        
+        // Câmera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+
+        // Renderizador
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true, // Fundo transparente para mostrar a cor do CSS
+            antialias: true
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Luz Ambiente Escura
+        const ambientLight = new THREE.AmbientLight(0x2a1111);
+        scene.add(ambientLight);
+
+        // Luzes de Ponto Coloridas (Tons de Vermelho, Laranja e Carmesim)
+        const lightPink = new THREE.PointLight(0xff0033, 1.2, 100);
+        lightPink.position.set(10, 10, 10);
+        scene.add(lightPink);
+
+        const lightBlue = new THREE.PointLight(0xff4500, 1.2, 100);
+        lightBlue.position.set(-10, -10, 10);
+        scene.add(lightBlue);
+        
+        const lightPurple = new THREE.PointLight(0x8b0000, 1.2, 100);
+        lightPurple.position.set(0, 0, 5);
+        scene.add(lightPurple);
+
+        // Partículas flutuantes
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 700;
+        const posArray = new Float32Array(particlesCount * 3);
+        const colorsArray = new Float32Array(particlesCount * 3);
+
+        const color1 = new THREE.Color(0xff0033); // Red Neon
+        const color2 = new THREE.Color(0xffaa00); // Golden Orange
+
+        for(let i = 0; i < particlesCount * 3; i+=3) {
+            // Posições espalhadas aleatoriamente
+            posArray[i] = (Math.random() - 0.5) * 100;     // x
+            posArray[i+1] = (Math.random() - 0.5) * 100;   // y
+            posArray[i+2] = (Math.random() - 0.5) * 50;    // z (profundidade)
+
+            // Mistura de cores para partículas
+            const mixedColor = color1.clone().lerp(color2, Math.random());
+            colorsArray[i] = mixedColor.r;
+            colorsArray[i+1] = mixedColor.g;
+            colorsArray[i+2] = mixedColor.b;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
+
+        // Material com brilho
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.15,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending // Efeito de luz ao sobrepor
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        const floatingObjects = [];
+
+        // Material brilhante/reflexivo premium para os objetos
+        const glassMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0xffdddd,
+            metalness: 0.8,
+            roughness: 0.2,
+            transmission: 0.5, // Efeito de vidro
+            thickness: 0.5,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1,
+            wireframe: true // Visual "tech/moderno" sem pesar
+        });
+
+        const solidNeonMaterial = new THREE.MeshStandardMaterial({
+            color: 0x220000,
+            emissive: 0xff0033,
+            emissiveIntensity: 0.5,
+            roughness: 0.1,
+            metalness: 0.8
+        });
+
+        // 1. Prisma (Representando um ingresso / forma estrutural)
+        const boxGeo = new THREE.BoxGeometry(2, 4, 0.2);
+        const box = new THREE.Mesh(boxGeo, glassMaterial);
+        box.position.set(-15, 5, -10);
+        scene.add(box);
+        floatingObjects.push(box);
+
+        // 2. Anel/Torus (Representando pulseira de evento / som)
+        const torusGeo = new THREE.TorusGeometry(3, 0.5, 16, 100);
+        const torus = new THREE.Mesh(torusGeo, solidNeonMaterial);
+        torus.position.set(15, -8, -15);
+        scene.add(torus);
+        floatingObjects.push(torus);
+
+        // 3. Esfera/Luz de palco
+        const sphereGeo = new THREE.SphereGeometry(1.5, 32, 32);
+        const sphereMaterial = new THREE.MeshStandardMaterial({
+            color: 0x000000,
+            emissive: 0xff2222,
+            emissiveIntensity: 0.8,
+            wireframe: true
+        });
+        const sphere = new THREE.Mesh(sphereGeo, sphereMaterial);
+        sphere.position.set(12, 12, -20);
+        scene.add(sphere);
+        floatingObjects.push(sphere);
+        
+        // 4. Cilindro pequeno (Representando copo estilizado / microfone)
+        const cylGeo = new THREE.CylinderGeometry(1, 1, 3, 32);
+        const cylinder = new THREE.Mesh(cylGeo, glassMaterial);
+        cylinder.position.set(-12, -10, -5);
+        scene.add(cylinder);
+        floatingObjects.push(cylinder);
+
+        // Variáveis para interação sutil do mouse com a câmera/partículas
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) * 0.001;
+            mouseY = (event.clientY - windowHalfY) * 0.001;
+        });
+
+        // Loop de renderização (Game/Animation Loop)
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Rotação sutil da câmera com base no mouse
+            targetX = mouseX * 2;
+            targetY = mouseY * 2;
+            camera.position.x += (targetX - camera.position.x) * 0.05;
+            camera.position.y += (-targetY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Animação das Partículas (Subindo e Girando)
+            particlesMesh.rotation.y = elapsedTime * 0.05;
+            particlesMesh.position.y = (elapsedTime * 0.5) % 20; // Sobe e reseta suavemente
+            
+            // Animação dos Objetos 3D (Flutuação e Rotação)
+            floatingObjects.forEach((obj, index) => {
+                // Rotação
+                obj.rotation.x += 0.005 * (index % 2 === 0 ? 1 : -1);
+                obj.rotation.y += 0.01;
+                
+                // Bobbing effect (flutuando para cima e para baixo)
+                const offset = index * Math.PI;
+                obj.position.y += Math.sin(elapsedTime * 1 + offset) * 0.02;
+            });
+
+            // Movendo as luzes dinamicamente para simular luzes de palco
+            lightPink.position.x = Math.sin(elapsedTime * 0.7) * 15;
+            lightPink.position.z = Math.cos(elapsedTime * 0.5) * 15;
+            
+            lightBlue.position.y = Math.sin(elapsedTime * 0.6) * 10;
+            lightBlue.position.x = Math.cos(elapsedTime * 0.8) * 15;
+
+            renderer.render(scene, camera);
+        }
+
+        // Responsividade do Canvas 3D
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Inicia a animação quando a janela carregar
+        window.onload = function() {
+            animate();
+        };
+
+        // Adiciona funcionalidade simples para evitar links quebrados em demonstração
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(link.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    // Pequeno feedback visual no clique usando animação inline
+                    link.style.transform = "scale(0.95)";
+                    setTimeout(() => {
+                        link.style.transform = "";
+                    }, 150);
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
