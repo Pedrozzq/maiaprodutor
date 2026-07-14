@@ -40,12 +40,23 @@ const EVENTOS = [
     name: "Inverno à Mesa",
     link: "https://www.instagram.com/festivalgastronomicoop/"
   },
+
+  
+
   {
     start: "2026-07-19",
     end: "2026-07-19",
     name: "Casa Trapaça",
-    link: "https://seudominio.com/vendas"
-  }
+    link: "https://centraldoseventos.com.br/casa-trapaca-in-mariana"
+  },
+
+    {
+        start: "2026-08-08",
+        end: "2026-08-08",
+        name: "Arza",
+        link: "https://byma.com.br/event/6a35815a11992a0004d735e3"
+      }
+
 ];
 
 /*
