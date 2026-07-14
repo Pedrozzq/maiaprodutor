@@ -336,11 +336,11 @@
             <!-- Botão 1: Evento Harmoniza (Destaque Principal Festa) -->
             <div class="w-full fade-up delay-2 mb-10 relative pt-3">
                 <div class="text-center absolute -top-4 left-0 right-0 z-20">
-                    <span class="inline-block party-badge px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bold rounded-full bg-[#0a0202]">
+                    <span id="evento-badge" class="inline-block party-badge px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bold rounded-full bg-[#0a0202]">
                         Próximo Evento
                     </span>
                 </div>
-                <a href="https://www.sympla.com.br/evento/inverno-a-mesa-o-sabor-do-inverno-em-ouro-preto/3485595?" class="link-card btn-highlight group flex items-center p-3.5 w-full text-left mt-2" aria-label="Inverno à Mesa">
+                <a id="evento-link" href="agenda.html" class="link-card btn-highlight group flex items-center p-3.5 w-full text-left mt-2" aria-label="Próximo evento">
                     <!-- Fundo interno sutil -->
                     <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
@@ -350,9 +350,9 @@
                     </div>
                     
                     <div class="ml-4 flex-1 relative z-10">
-                        <!-- Título Animado (Tamanho intermediário: text-xl) -->
-                        <h3 class="text-xl font-extrabold party-target-text uppercase tracking-wide">Inverno à Mesa</h3>
-                        <p class="text-xs text-gray-300 mt-0.5 font-medium">Garanta sua presença!</p>
+                        <!-- Título Animado (atualizado automaticamente pelo eventos.js) -->
+                        <h3 id="evento-titulo" class="text-xl font-extrabold party-target-text uppercase tracking-wide">Festival Harmoniza</h3>
+                        <p id="evento-sub" class="text-xs text-gray-300 mt-0.5 font-medium">Garanta sua presença!</p>
                     </div>
                     
                     <!-- Seta Animada -->
@@ -474,6 +474,48 @@
             </p>
         </footer>
     </main>
+
+    <!-- Eventos centralizados: edite apenas o arquivo eventos.js -->
+    <script src="eventos.js"></script>
+    <script>
+        // Atualiza o botão principal com o próximo evento da agenda (eventos.js)
+        (function() {
+            const ev = typeof getProximoEvento === "function" ? getProximoEvento() : null;
+            const link = document.getElementById("evento-link");
+            const titulo = document.getElementById("evento-titulo");
+            const sub = document.getElementById("evento-sub");
+            const badge = document.getElementById("evento-badge");
+
+            function dataBR(iso) {
+                const [a, m, d] = iso.split("-");
+                return `${d}/${m}`;
+            }
+
+            if (ev) {
+                link.href = ev.link;
+                link.setAttribute("aria-label", ev.name);
+                titulo.textContent = ev.name;
+
+                const periodo = ev.start === ev.end
+                    ? dataBR(ev.start)
+                    : `${dataBR(ev.start)} a ${dataBR(ev.end)}`;
+
+                if (ev.acontecendoAgora) {
+                    badge.textContent = "Acontecendo Agora";
+                    sub.textContent = `Hoje! Garanta sua presença!`;
+                } else {
+                    badge.textContent = "Próximo Evento";
+                    sub.textContent = `${periodo} — Garanta sua presença!`;
+                }
+            } else {
+                // Sem eventos futuros: botão leva para a agenda
+                link.href = "agenda.html";
+                titulo.textContent = "Agenda de Eventos";
+                sub.textContent = "Confira nossa programação completa";
+                badge.textContent = "Fique Ligado";
+            }
+        })();
+    </script>
 
     <script>
         // Configuração básica da cena 3D usando Three.js
