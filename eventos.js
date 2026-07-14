@@ -38,7 +38,7 @@ const EVENTOS = [
     start: "2026-07-17",
     end: "2026-07-19",
     name: "Inverno à Mesa",
-    link: "https://www.instagram.com/festivalgastronomicoop/"
+    link: "https://www.sympla.com.br/evento/inverno-a-mesa-o-sabor-do-inverno-em-ouro-preto/3485595?referrer=www.google.com"
   },
 
   
