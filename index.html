@@ -265,6 +265,16 @@
             50%      { background-color: rgba(255, 255, 255, 0.1); color: #ffffff; border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
         }
 
+        /* Ícone Animado do Botão 1: alterna entre ícones de festa suavemente */
+        .icon-alternate {
+            display: inline-block;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .icon-alternate.icon-swap {
+            opacity: 0;
+            transform: scale(0.4) rotate(25deg);
+        }
+
         /* Cores do Badge (Próximo Evento) em sincronia */
         .party-badge {
             animation: elegantBadge 6s infinite ease-in-out;
@@ -346,7 +356,7 @@
                     
                     <!-- Ícone Animado (Tamanho intermediário: w-14 h-14) -->
                     <div class="link-icon-wrapper party-target-icon w-14 h-14 rounded-full flex items-center justify-center text-2xl shrink-0">
-                        <i class="fas fa-wine-glass"></i>
+                        <i id="evento-icon" class="fas fa-music icon-alternate"></i>
                     </div>
                     
                     <div class="ml-4 flex-1 relative z-10">
@@ -501,7 +511,7 @@
                     : `${dataBR(ev.start)} a ${dataBR(ev.end)}`;
 
                 if (ev.acontecendoAgora) {
-                    badge.textContent = "Acontecendo Agora";
+                    badge.textContent = "É H";
                     sub.textContent = `Hoje! Garanta sua presença!`;
                 } else {
                     badge.textContent = "Próximo Evento";
@@ -514,6 +524,33 @@
                 sub.textContent = "Confira nossa programação completa";
                 badge.textContent = "Fique Ligado";
             }
+        })();
+    </script>
+
+    <script>
+        // Ícone animado do Botão 1: alterna entre ícones de festa em loop contínuo
+        (function() {
+            const iconEl = document.getElementById("evento-icon");
+            if (!iconEl) return;
+
+            const icones = [
+                "fa-music",
+                "fa-compact-disc",
+                "fa-fire",
+                "fa-star"
+            ];
+            let indice = 0;
+
+            setInterval(() => {
+                iconEl.classList.add("icon-swap");
+                setTimeout(() => {
+                    indice = (indice + 1) % icones.length;
+                    iconEl.className = "fas " + icones[indice] + " icon-alternate icon-swap";
+                    // Força o reflow antes de remover a classe para garantir a transição de entrada
+                    void iconEl.offsetWidth;
+                    iconEl.classList.remove("icon-swap");
+                }, 300);
+            }, 2200);
         })();
     </script>
 
