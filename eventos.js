@@ -29,33 +29,41 @@
 
 const EVENTOS = [
   {
-    start: "2026-07-09",
-    end: "2026-07-12",
-    name: "Festival Harmoniza",
-    link: "https://www.sympla.com.br/evento/festival-harmoniza/3477064?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnriFpCTdViwKRaye8Oh82eu_YvQuGXa5TmqKwQY6t10222SDInTdRc1h0DcY_aem_Dt03fOcqyWC5m8-3wlxXsg&utm_id=97760_v0_s00_e0_tv3&referrer=l.instagram.com&referrer=l.instagram.com"
+    start: "2026-08-22",
+    end: "2026-08-22",
+    name: "Arza",
+    link: "https://byma.com.br/event/6a35815a11992a0004d735e3"
   },
   {
-    start: "2026-07-17",
-    end: "2026-07-19",
-    name: "Inverno à Mesa",
-    link: "https://www.sympla.com.br/evento/inverno-a-mesa-o-sabor-do-inverno-em-ouro-preto/3485595m"
+    start: "2026-08-22",
+    end: "2026-08-22",
+    name: "Matue em Viçosa",
+    link: "https://stingressos.com.br/pt-BR/eventos/matue-em-vicosa-mg"
   },
-
-  
-
   {
-    start: "2026-07-19",
-    end: "2026-07-19",
-    name: "Casa Trapaça",
-    link: "https://centraldoseventos.com.br/casa-trapaca-in-mariana"
+    start: "2026-08-29",
+    end: "2026-08-29",
+    name: "Arraiá Seven",
+    link: "#"
   },
-
-    {
-        start: "2026-08-08",
-        end: "2026-08-08",
-        name: "Arza",
-        link: "https://byma.com.br/event/6a35815a11992a0004d735e3"
-      }
+  {
+    start: "2026-09-19",
+    end: "2026-09-19",
+    name: "Spring Break",
+    link: "https://lmpass.com.br/evento/2678/SPRING_FESTIVAL_UNITY"
+  },
+  {
+    start: "2026-10-17",
+    end: "2026-10-17",
+    name: "Micareta do Bloco Chapado",
+    link: "#"
+  },
+  {
+    start: "2026-11-21",
+    end: "2026-11-21",
+    name: "Mais Louco que o Batman",
+    link: "#"
+  }
 
 ];
 
