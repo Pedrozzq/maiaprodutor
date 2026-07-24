@@ -44,7 +44,7 @@ const EVENTOS = [
     start: "2026-08-29",
     end: "2026-08-29",
     name: "Arraiá Seven",
-    link: "#"
+    link: "https://oticket.com.br/event/10960/arraia-de-volta-as-origens"
   },
   {
     start: "2026-09-19",
