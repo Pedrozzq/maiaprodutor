@@ -68,7 +68,7 @@ const EVENTOS = [
     start: "2026-11-21",
     end: "2026-11-21",
     name: "Mais Louco que o Batman",
-    link: "#"
+    link: "https://app.acessoja.com/evento/mais-louco-que-o-batman-o-festival?promoter=maia-produtor"
   }
 
 ];
