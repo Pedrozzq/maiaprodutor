@@ -97,3 +97,31 @@ function getProximoEvento() {
     acontecendoAgora: ev.start <= hojeKey && (ev.end || ev.start) >= hojeKey
   };
 }
+
+/*
+  Função usada pelo index.html para descobrir TODOS os eventos do
+  próximo dia com evento (o mesmo dia usado por getProximoEvento).
+  Se houver mais de um evento nessa data, o botão principal do
+  index.html alterna entre eles automaticamente.
+*/
+function getEventosDoProximoDia() {
+  const hoje = new Date();
+  const hojeKey = hoje.getFullYear() + "-" +
+    String(hoje.getMonth() + 1).padStart(2, "0") + "-" +
+    String(hoje.getDate()).padStart(2, "0");
+
+  const futuros = EVENTOS
+    .filter(ev => (ev.end || ev.start) >= hojeKey)
+    .sort((a, b) => a.start.localeCompare(b.start));
+
+  if (futuros.length === 0) return [];
+
+  const primeiraData = futuros[0].start;
+
+  return futuros
+    .filter(ev => ev.start === primeiraData)
+    .map(ev => ({
+      ...ev,
+      acontecendoAgora: ev.start <= hojeKey && (ev.end || ev.start) >= hojeKey
+    }));
+}
