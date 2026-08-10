@@ -37,7 +37,7 @@ const EVENTOS = [
   {
     start: "2026-08-22",
     end: "2026-08-22",
-    name: "Matue em Viçosa",
+    name: "Matuê em Viçosa",
     link: "https://stingressos.com.br/pt-BR/eventos/matue-em-vicosa-mg"
   },
   {
