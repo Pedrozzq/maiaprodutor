@@ -47,6 +47,12 @@ const EVENTOS = [
     link: "https://oticket.com.br/event/10960/arraia-de-volta-as-origens"
   },
   {
+    start: "2026-09-13",
+    end: "2026-09-13",
+    name: "Casa Trapaça",
+    link: "https://centraldoseventos.com.br/casa-trapaca"
+  },
+  {
     start: "2026-09-19",
     end: "2026-09-19",
     name: "Spring Break",
