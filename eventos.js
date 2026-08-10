@@ -29,12 +29,6 @@
 
 const EVENTOS = [
   {
-    start: "2026-08-15",
-    end: "2026-08-15",
-    name: "Mixed by Mixed BH",
-    link: "https://www.3rseventos.com.br/comprar-ingressos-mixed-by-mixed-bh-2026"
-  },
-  {
     start: "2026-08-22",
     end: "2026-08-22",
     name: "Arza",
