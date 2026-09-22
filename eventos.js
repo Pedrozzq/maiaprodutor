@@ -62,7 +62,7 @@ const EVENTOS = [
     start: "2026-10-17",
     end: "2026-10-17",
     name: "Micareta do Bloco Chapado",
-    link: "#"
+    link: "https://www.blueticket.com.br/evento/41509/micareta-chapado-2026"
   },
   {
     start: "2026-11-21",
