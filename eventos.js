@@ -65,6 +65,12 @@ const EVENTOS = [
     link: "https://www.blueticket.com.br/evento/41509/micareta-chapado-2026"
   },
   {
+    start: "2026-10-17",
+    end: "2026-10-17",
+    name: "After do Micareta",
+    link: "https://centraldoseventos.com.br/after-do-micareta"
+  },
+  {
     start: "2026-11-21",
     end: "2026-11-21",
     name: "Mais Louco que o Batman",
