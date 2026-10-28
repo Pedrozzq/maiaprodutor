@@ -287,32 +287,6 @@
             opacity: 0;
         }
 
-        /* Botões das opções de Excursões (visual distinto dos demais botões) */
-        .excursao-card {
-            position: relative;
-            background: linear-gradient(135deg, rgba(255, 69, 0, 0.10), rgba(255, 0, 51, 0.04));
-            border: 1px dashed rgba(255, 140, 0, 0.5);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .excursao-card:hover {
-            border-style: solid;
-            border-color: rgba(255, 140, 0, 0.9);
-            background: linear-gradient(135deg, rgba(255, 69, 0, 0.22), rgba(255, 0, 51, 0.1));
-            transform: translateX(6px);
-        }
-
-        .excursao-card .excursao-icon {
-            background: linear-gradient(135deg, var(--neon-orange), var(--neon-red));
-            border-color: transparent;
-            color: #fff;
-        }
-
-        .excursao-card .excursao-arrow {
-            color: var(--neon-orange);
-        }
-
         /* Cores do Badge (Próximo Evento) em sincronia */
         .party-badge {
             animation: elegantBadge 6s infinite ease-in-out;
@@ -430,50 +404,6 @@
                 </div>
             </a>
 
-            <!-- Botão 2: Excursões (abre opções) -->
-            <div class="fade-up delay-4 w-full">
-                <button type="button" id="excursoes-toggle" class="link-card group flex items-center p-3 w-full text-left" aria-label="Excursões" aria-expanded="false">
-                    <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-red-500 group-hover:text-white shrink-0">
-                        <i class="fas fa-bus"></i>
-                    </div>
-                    <div class="ml-4 flex-1">
-                        <h3 class="text-lg font-semibold text-white group-hover:text-red-300 transition-colors">Excursões</h3>
-                        <p class="text-xs text-gray-400">Veja as excursões disponíveis</p>
-                    </div>
-                    <div class="mr-2 text-gray-500 transition-transform" id="excursoes-chevron">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </button>
-
-                <div id="excursoes-options" class="hidden mt-3 space-y-3 pl-2">
-                    <a href="https://chat.whatsapp.com/CeI3uN2neNTIo5R5uAeAof?s=cl&p=i&mlu=4" class="excursao-card group flex items-center p-3 w-full text-left" aria-label="Spring Break">
-                        <div class="excursao-icon w-12 h-12 rounded-lg flex items-center justify-center text-xl text-orange-400 border border-orange-400/40 shrink-0">
-                            <i class="fas fa-champagne-glasses"></i>
-                        </div>
-                        <div class="ml-4 flex-1">
-                            <h3 class="text-lg font-semibold text-white transition-colors">Spring Break</h3>
-                            <p class="text-xs text-gray-400">Entre no grupo da excursão</p>
-                        </div>
-                        <div class="mr-2 excursao-arrow transition-transform transform group-hover:translate-x-1">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </a>
-
-                    <a href="https://chat.whatsapp.com/C3Rki7fOLiPAGdtslyjioY?s=cl&p=i&mlu=4" class="excursao-card group flex items-center p-3 w-full text-left" aria-label="Matuê Viçosa">
-                        <div class="excursao-icon w-12 h-12 rounded-lg flex items-center justify-center text-xl text-orange-400 border border-orange-400/40 shrink-0">
-                            <i class="fas fa-ticket"></i>
-                        </div>
-                        <div class="ml-4 flex-1">
-                            <h3 class="text-lg font-semibold text-white transition-colors">Matuê Viçosa</h3>
-                            <p class="text-xs text-gray-400">Entre no grupo da excursão</p>
-                        </div>
-                        <div class="mr-2 excursao-arrow transition-transform transform group-hover:translate-x-1">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
             <!-- Botão 3: Maia Wear -->
             <a href="https://www.instagram.com/maiawearoficial?igsh=MTJwN3lrbXV5Zm8xZA==" class="link-card fade-up delay-5 group flex items-center p-3 w-full text-left" aria-label="Maia Wear">
                 <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-rose-500 group-hover:text-white shrink-0">
@@ -502,20 +432,6 @@
                 </div>
             </a>
 
-            <!-- Botão 5: Instagram Oficial -->
-            <a href="http://www.instagram.com/maiaprodutor_" class="link-card fade-up delay-7 group flex items-center p-3 w-full text-left" aria-label="Instagram Oficial">
-                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-rose-500 group-hover:text-white shrink-0">
-                    <i class="fab fa-instagram"></i>
-                </div>
-                <div class="ml-4 flex-1">
-                    <h3 class="text-lg font-semibold text-white group-hover:text-rose-300 transition-colors">Instagram</h3>
-                    <p class="text-xs text-gray-400">Acompanhe os bastidores e novidades</p>
-                </div>
-                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-
             <!-- NOVO: Instagram da Produtora -->
             <a href="https://www.instagram.com/maiaproducoesop" class="link-card fade-up delay-8 group flex items-center p-3 w-full text-left" aria-label="Instagram da Produtora">
                 <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-fuchsia-500 group-hover:text-white shrink-0">
@@ -524,19 +440,6 @@
                 <div class="ml-4 flex-1">
                     <h3 class="text-lg font-semibold text-white group-hover:text-fuchsia-300 transition-colors">Instagram da Produtora</h3>
                     <p class="text-xs text-gray-400">Acompanhe os projetos e eventos da agência</p>
-                </div>
-                <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-            
-            <a href="https://chat.whatsapp.com/DfFQAC6VKcC16HHm1SNP5f?mode=gi_t" class="link-card fade-up delay-3 group flex items-center p-3 w-full text-left" aria-label="WhatsApp Comercial">
-                <div class="link-icon-wrapper w-12 h-12 rounded-full flex items-center justify-center text-xl text-green-500 group-hover:text-white shrink-0">
-                    <i class="fab fa-whatsapp"></i>
-                </div>
-                <div class="ml-4 flex-1">
-                    <h3 class="text-lg font-semibold text-white group-hover:text-green-300 transition-colors">Seleção de divulgadoras: Federal Folia 2027</h3>
-                    <p class="text-xs text-gray-400">Entre agora!</p>
                 </div>
                 <div class="mr-2 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 text-gray-500">
                     <i class="fas fa-chevron-right"></i>
@@ -671,23 +574,6 @@
                 sub.textContent = "Confira nossa programação completa";
                 badge.textContent = "Fique Ligado";
             }
-        })();
-    </script>
-
-    <script>
-        // Toggle do botão Excursões: mostra/oculta as opções (Spring Break e Matuê Viçosa)
-        (function() {
-            const toggle = document.getElementById("excursoes-toggle");
-            const options = document.getElementById("excursoes-options");
-            const chevron = document.getElementById("excursoes-chevron");
-            if (!toggle || !options) return;
-
-            toggle.addEventListener("click", () => {
-                const aberto = !options.classList.contains("hidden");
-                options.classList.toggle("hidden");
-                toggle.setAttribute("aria-expanded", String(!aberto));
-                chevron.style.transform = aberto ? "rotate(0deg)" : "rotate(180deg)";
-            });
         })();
     </script>
 
